@@ -42,7 +42,8 @@ namespace GestiontrendCoins.FormEditar
         {
             if (ArticuloSeleccionado.Precio.ToString().All(char.IsDigit))
             {
-                WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(ArticuloSeleccionado.Imagen)), ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
+                var img = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(ArticuloSeleccionado.Imagen));
+                WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ArticuloSeleccionado.Id,img, ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
                 return true;
             }
             else
@@ -61,6 +62,7 @@ namespace GestiontrendCoins.FormEditar
             if (openFileDialog.ShowDialog() == true)
             {
                 ArticuloSeleccionado.Imagen = new BitmapImage(new Uri(openFileDialog.FileName));
+                MessageBox.Show(ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(ArticuloSeleccionado.Imagen)), "Error Form Articulo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

@@ -62,7 +62,7 @@ namespace GestiontrendCoins.FormAñadir
         {
             if (Precio.ToString().All(char.IsDigit))
             {
-                WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(Imagen)), Descripcion, Precio, Tipo)));
+                WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(0,ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(Imagen)), Descripcion, Precio, Tipo)));
                 return true;
             }
             else

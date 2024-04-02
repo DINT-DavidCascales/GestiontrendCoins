@@ -55,8 +55,8 @@
             <TextBox Text="{Binding Path=ArticuloSeleccionado.Descripcion}" Margin="5" Height="37"></TextBox>
             <TextBlock Margin="5">Precio</TextBlock>
             <TextBox Text="{Binding Path=ArticuloSeleccionado.Precio}" Margin="5" Width="50" HorizontalAlignment="Left" Height="17"></TextBox>
-            <TextBlock Margin="5"><Run Text="Tipo"/></TextBlock>
-            <ComboBox Width="100" HorizontalAlignment="Left" Margin="5" SelectedItem="{Binding ArticuloSeleccionado.Tipo , Mode=TwoWay}" ItemsSource="{Binding Path=ListaTipos}"></ComboBox>
+            <TextBlock Margin="5" Text="Tipo"></TextBlock>
+            <ComboBox Width="100" HorizontalAlignment="Left" Margin="5" SelectedItem="{Binding ArticuloSeleccionado.Tipo}" ItemsSource="{Binding Path=ListaTipos}"></ComboBox>
         </StackPanel>
     </DockPanel>
 </Window>

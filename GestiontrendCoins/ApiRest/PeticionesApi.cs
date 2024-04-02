@@ -33,6 +33,7 @@ namespace GestiontrendCoins.ApiRest
             string data = JsonConvert.SerializeObject(nuevoArticulo);
             request.AddParameter("application/json", data,ParameterType.RequestBody);
             var response = cliente.Execute(request);
+            Thread.Sleep(1000);
             return response;
         }
         public RestResponse PutArticulo(Articulo actualizaArticulo)
@@ -42,6 +43,7 @@ namespace GestiontrendCoins.ApiRest
             string data = JsonConvert.SerializeObject(actualizaArticulo);
             request.AddParameter("application/json", data, ParameterType.RequestBody);
             var response = cliente.Execute(request);
+            Thread.Sleep(1000);
             return response;
         }
         public RestResponse DeleteArticulo(int id)

@@ -57,7 +57,7 @@ namespace GestiontrendCoins
                 }
                 else
                 {
-                    MessageBox.Show("Error al añadir un articulo", "Error Añadir Articulo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al añadir un articulo " + peticiones.PostArticulo(m.Value).ErrorMessage, "Error Añadir Articulo", MessageBoxButton.OK, MessageBoxImage.Error);
                     Articulos = peticiones.GetArticulos();
                 }
                 
@@ -72,7 +72,7 @@ namespace GestiontrendCoins
                 }
                 else
                 {
-                    MessageBox.Show("Error al editar un articulo", "Error Editar Articulo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Error al editar un articulo ", "Error Editar Articulo", MessageBoxButton.OK, MessageBoxImage.Error);
                     Articulos = peticiones.GetArticulos();
                 }
             });

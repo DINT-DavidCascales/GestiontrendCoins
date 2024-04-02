@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,30 +15,39 @@ namespace GestiontrendCoins.Modelo
     class Articulo : ObservableObject
     {
         private int id;
+        [JsonProperty("id")]
         public int Id
         {
             get { return id; }
             set { SetProperty(ref id, value); }
         }
+
         private BitmapImage imagen;
+
         public BitmapImage Imagen
         {
             get { return imagen; }
             set { SetProperty(ref imagen, value); }
         }
         private string descripcion;
+        [JsonProperty("descripcion")]
+
         public string Descripcion
         {
             get { return descripcion; }
             set { SetProperty(ref descripcion, value); }
         }
         private int precio;
+        [JsonProperty("precio")]
+
         public int Precio
         {
             get { return precio; }
             set { SetProperty(ref precio, value); }
         }
         private string tipo;
+        [JsonProperty("tipo")]
+
         public string Tipo
         {
             get { return tipo; }
