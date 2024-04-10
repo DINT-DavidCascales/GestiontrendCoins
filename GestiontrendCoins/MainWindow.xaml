@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1090" MinHeight="500" MinWidth="800">
     <Window.Resources>
+        <local:ConvertidorImg x:Key="convertidorImg"></local:ConvertidorImg>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="20"></Setter>
             <Setter Property="Height" Value="20"></Setter>
@@ -89,7 +90,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="False" Margin="30" Width="200">
-                        <Image Source="{Binding Path=Imagen}" DockPanel.Dock="top" Height="50"  HorizontalAlignment="center"></Image>
+                        <Image Source="{Binding Path=Imagendb,Converter={StaticResource convertidorImg}}" DockPanel.Dock="top" Height="50"  HorizontalAlignment="center"></Image>
                         <StackPanel HorizontalAlignment="Center">
                             <StackPanel Height="60">
                                 <TextBlock VerticalAlignment="Center" Text="{Binding Path=Descripcion}"></TextBlock>

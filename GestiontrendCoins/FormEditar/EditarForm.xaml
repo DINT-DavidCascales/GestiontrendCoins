@@ -9,6 +9,7 @@
         ResizeMode="NoResize"
         ShowInTaskbar="False">
     <Window.Resources>
+        <local:ConvertidorImg x:Key="convertidorImg"></local:ConvertidorImg>
         <Style TargetType="{x:Type Button}" x:Key="botonFoto">
             <Setter Property="Margin" Value="20"></Setter>
             <Setter Property="Height" Value="20"></Setter>
@@ -38,7 +39,7 @@
             </TextBlock>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="150" Margin="10">
-            <Image Source="{Binding Path=ArticuloSeleccionado.Imagen}" Width="150" Height="150"></Image>
+            <Image Source="{Binding Path=ArticuloSeleccionado.Imagen, Converter={StaticResource convertidorImg}}" Width="150" Height="150"></Image>
             <Button Style="{StaticResource botonFoto}" Command="{Binding Path=CambiarFotoCommand}">Cambiar Foto</Button>
         </StackPanel>
         <Grid DockPanel.Dock="Bottom" Height="40" >

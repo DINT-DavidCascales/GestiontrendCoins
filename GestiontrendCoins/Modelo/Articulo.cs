@@ -22,13 +22,20 @@ namespace GestiontrendCoins.Modelo
             set { SetProperty(ref id, value); }
         }
 
-        private BitmapImage imagen;
-
-        public BitmapImage Imagen
+        private string imagendb;
+        public string Imagendb
         {
-            get { return imagen; }
-            set { SetProperty(ref imagen, value); }
+            get { return imagendb; }
+            set { SetProperty(ref imagendb, value); }
         }
+        /*
+        private BitmapImage imagendb;
+
+        public BitmapImage Imagendb
+        {
+            get { return imagendb; }
+            set { SetProperty(ref imagendb, value); }
+        }*/
         private string descripcion;
         [JsonProperty("descripcion")]
 
@@ -62,14 +69,14 @@ namespace GestiontrendCoins.Modelo
         {
 
             Id = id;
-            Imagen =  ConversorImagen.Base64ToImage(imagen);
+            Imagendb = imagen;
             Descripcion = descripcion;
             Precio = precio;
             Tipo = tipo;
         }
         public Articulo(string imagen, string descripcion, int precio, string tipo)
         {
-            Imagen =  ConversorImagen.Base64ToImage(imagen);
+            Imagendb =  imagen;
             Descripcion = descripcion;
             Precio = precio;
             Tipo = tipo;

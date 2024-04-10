@@ -25,11 +25,11 @@ namespace GestiontrendCoins.FormAñadir
             get { return listaTipos; }
             set { SetProperty(ref listaTipos, value); }
         }
-        private BitmapImage imagen;
-        public BitmapImage Imagen
+        private string imagendb;
+        public string Imagendb
         {
-            get { return imagen; }
-            set { SetProperty(ref imagen, value); }
+            get { return imagendb; }
+            set { SetProperty(ref imagendb, value); }
         }
 
         private string descripcion;
@@ -62,7 +62,7 @@ namespace GestiontrendCoins.FormAñadir
         {
             if (Precio.ToString().All(char.IsDigit))
             {
-                WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(0,ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(Imagen)), Descripcion, Precio, Tipo)));
+                WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(0,Imagendb, Descripcion, Precio, Tipo)));
                 return true;
             }
             else
@@ -77,11 +77,11 @@ namespace GestiontrendCoins.FormAñadir
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Imagenes|*.png";
-            openFileDialog.Title = "Abriendo imagen";
+            openFileDialog.Title = "Abriendo imagendb";
 
             if(openFileDialog.ShowDialog()==true)
             {
-                Imagen = new BitmapImage(new Uri(openFileDialog.FileName));
+                Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
             }
         }
     }

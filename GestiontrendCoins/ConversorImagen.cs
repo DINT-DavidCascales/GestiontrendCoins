@@ -63,10 +63,10 @@ namespace GestiontrendCoins
             {
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad; // Esto carga la imagen inmediatamente
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad; // Esto carga la imagendb inmediatamente
                 bitmapImage.StreamSource = memoryStream;
                 bitmapImage.EndInit();
-                // Ahora 'bitmapImage' contiene la imagen desde el arreglo de bytes
+                // Ahora 'bitmapImage' contiene la imagendb desde el arreglo de bytes
                 return bitmapImage;
             }
         }

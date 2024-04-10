@@ -42,8 +42,7 @@ namespace GestiontrendCoins.FormEditar
         {
             if (ArticuloSeleccionado.Precio.ToString().All(char.IsDigit))
             {
-                var img = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(ArticuloSeleccionado.Imagen));
-                WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ArticuloSeleccionado.Id,img, ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
+                WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ArticuloSeleccionado.Id,ArticuloSeleccionado.Imagendb, ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
                 return true;
             }
             else
@@ -57,12 +56,12 @@ namespace GestiontrendCoins.FormEditar
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Imagenes|*.png";
-            openFileDialog.Title = "Abriendo imagen";
+            openFileDialog.Title = "Abriendo imagendb";
 
             if (openFileDialog.ShowDialog() == true)
             {
-                ArticuloSeleccionado.Imagen = new BitmapImage(new Uri(openFileDialog.FileName));
-                MessageBox.Show(ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(ArticuloSeleccionado.Imagen)), "Error Form Articulo", MessageBoxButton.OK, MessageBoxImage.Information);
+                ArticuloSeleccionado.Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
+                MessageBox.Show(ArticuloSeleccionado.Imagendb, "Error Form Articulo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
