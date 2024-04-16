@@ -36,13 +36,26 @@ namespace GestiontrendCoins.FormEditar
             ListaTipos = new ObservableCollection<String>() { "Pantalones", "Camisetas", "Calzado", "Complementos" };
             CambiarFotoCommand = new RelayCommand(AbrirDialogoCambiarFoto);
             ArticuloSeleccionado = WeakReferenceMessenger.Default.Send<ArticuloSeleccionadoMensaje>();
+
+            if (ArticuloSeleccionado.Imagendb is null)
+            {
+                
+                ArticuloSeleccionado.ImagenBMP = new BitmapImage(new Uri("pack://application:,,,/Resources/ropaMissing.png"));
+            }
+            else
+            {
+                ArticuloSeleccionado.ImagenBMP = ConversorImagen.Base64ToImage(ArticuloSeleccionado.Imagendb);
+
+            }
         }
 
         public bool EditarArticulo()
         {
-            if (ArticuloSeleccionado.Precio.ToString().All(char.IsDigit))
+             
+            if (ArticuloSeleccionado.Precio.ToString().All(char.IsDigit) && ArticuloSeleccionado.ImagenBMP is not null)
             {
-                WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ArticuloSeleccionado.Id,ArticuloSeleccionado.Imagendb, ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
+                // WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ArticuloSeleccionado.Id,ArticuloSeleccionado.Imagendb, ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
+                WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(ArticuloSeleccionado));
                 return true;
             }
             else
@@ -61,7 +74,7 @@ namespace GestiontrendCoins.FormEditar
             if (openFileDialog.ShowDialog() == true)
             {
                 ArticuloSeleccionado.Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
-                MessageBox.Show(ArticuloSeleccionado.Imagendb, "Error Form Articulo", MessageBoxButton.OK, MessageBoxImage.Information);
+                ArticuloSeleccionado.ImagenBMP = ConversorImagen.Base64ToImage(ArticuloSeleccionado.Imagendb);
             }
         }
     }

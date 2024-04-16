@@ -25,6 +25,14 @@ namespace GestiontrendCoins.FormAñadir
             get { return listaTipos; }
             set { SetProperty(ref listaTipos, value); }
         }
+
+        private Articulo _nuevoArticulo;
+        public Articulo NuevoArticulo
+        {
+            get { return _nuevoArticulo; }
+            set { SetProperty(ref _nuevoArticulo, value); }
+        }
+        /*
         private string imagendb;
         public string Imagendb
         {
@@ -49,20 +57,23 @@ namespace GestiontrendCoins.FormAñadir
         {
             get { return tipo; }
             set { SetProperty(ref tipo, value); }
-        }
+        }*/
         public RelayCommand CambiarFotoCommand { get; }
 
         public AnadirFormVM()
         {
+            NuevoArticulo = new Articulo();
             CambiarFotoCommand = new RelayCommand(AbrirDialogoCambiarFoto);
             ListaTipos = new ObservableCollection<String>() { "Pantalones", "Camisetas", "Calzado", "Complementos" };
         }
 
         public bool AñadirArticulo()
         {
-            if (Precio.ToString().All(char.IsDigit))
+            if (NuevoArticulo.Precio.ToString().All(char.IsDigit) && NuevoArticulo.ImagenBMP is not null)
             {
-                WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(0,Imagendb, Descripcion, Precio, Tipo)));
+                NuevoArticulo.Id = 0;
+                //WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(0,Imagendb, Descripcion, Precio, Tipo)));
+                WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(NuevoArticulo));
                 return true;
             }
             else
@@ -81,7 +92,8 @@ namespace GestiontrendCoins.FormAñadir
 
             if(openFileDialog.ShowDialog()==true)
             {
-                Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
+                NuevoArticulo.Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
+                NuevoArticulo.ImagenBMP = ConversorImagen.Base64ToImage(NuevoArticulo.Imagendb);
             }
         }
     }

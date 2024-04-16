@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -28,14 +29,14 @@ namespace GestiontrendCoins.Modelo
             get { return imagendb; }
             set { SetProperty(ref imagendb, value); }
         }
-        /*
-        private BitmapImage imagendb;
+        
+        private BitmapImage? imagenBMP;
 
-        public BitmapImage Imagendb
+        public BitmapImage? ImagenBMP
         {
-            get { return imagendb; }
-            set { SetProperty(ref imagendb, value); }
-        }*/
+            get { return imagenBMP; }
+            set { SetProperty(ref imagenBMP, value); }
+        }
         private string descripcion;
         [JsonProperty("descripcion")]
 
@@ -67,7 +68,7 @@ namespace GestiontrendCoins.Modelo
         }
         public Articulo(int id, string imagen, string descripcion, int precio, string tipo)
         {
-
+            
             Id = id;
             Imagendb = imagen;
             Descripcion = descripcion;
