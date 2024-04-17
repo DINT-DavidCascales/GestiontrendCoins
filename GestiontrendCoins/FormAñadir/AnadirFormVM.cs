@@ -32,32 +32,7 @@ namespace GestiontrendCoins.FormAñadir
             get { return _nuevoArticulo; }
             set { SetProperty(ref _nuevoArticulo, value); }
         }
-        /*
-        private string imagendb;
-        public string Imagendb
-        {
-            get { return imagendb; }
-            set { SetProperty(ref imagendb, value); }
-        }
-
-        private string descripcion;
-        public string Descripcion
-        {
-            get { return descripcion; }
-            set { SetProperty(ref descripcion, value); }
-        }
-        private int precio;
-        public int Precio
-        {
-            get { return precio; }
-            set { SetProperty(ref precio, value); }
-        }
-        private string tipo;
-        public string Tipo
-        {
-            get { return tipo; }
-            set { SetProperty(ref tipo, value); }
-        }*/
+        
         public RelayCommand CambiarFotoCommand { get; }
 
         public AnadirFormVM()
@@ -69,7 +44,7 @@ namespace GestiontrendCoins.FormAñadir
 
         public bool AñadirArticulo()
         {
-            if (NuevoArticulo.Precio.ToString().All(char.IsDigit) && NuevoArticulo.ImagenBMP is not null)
+            if (NuevoArticulo.Precio.ToString().All(char.IsDigit))
             {
                 NuevoArticulo.Id = 0;
                 //WeakReferenceMessenger.Default.Send(new EnviarArticuloAñadirMensaje(new Articulo(0,Imagendb, Descripcion, Precio, Tipo)));
@@ -87,12 +62,16 @@ namespace GestiontrendCoins.FormAñadir
         public void AbrirDialogoCambiarFoto()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Imagenes|*.png";
             openFileDialog.Title = "Abriendo imagendb";
+            openFileDialog.Filter = "Imágenes|*.bmp; *.gif; *.jpg; *.jpeg; *.png;";
 
-            if(openFileDialog.ShowDialog()==true)
+            if (openFileDialog.ShowDialog() == true)
             {
+                // Obtenemos la imagen en base64.
                 NuevoArticulo.Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
+
+                // Obtenemos la imagen en BitmapImage.
+                // Al utilizar MVVM, la referencia es a la propiedad y no a la RUTA.
                 NuevoArticulo.ImagenBMP = ConversorImagen.Base64ToImage(NuevoArticulo.Imagendb);
             }
         }

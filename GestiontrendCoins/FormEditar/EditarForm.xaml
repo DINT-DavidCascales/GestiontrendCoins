@@ -38,7 +38,7 @@
             </TextBlock>
         </StackPanel>
         <StackPanel DockPanel.Dock="Left" Width="150" Margin="10">
-            <Image Source="{Binding Path=ArticuloSeleccionado.ImagenBMP}" Width="150" Height="150"></Image>
+            <Image Source="{Binding Path=ArticuloSeleccionado.ImagenBMP,UpdateSourceTrigger=PropertyChanged}" Width="150" Height="150"></Image>
             <Button Style="{StaticResource botonFoto}" Command="{Binding Path=CambiarFotoCommand}">Cambiar Foto</Button>
         </StackPanel>
         <Grid DockPanel.Dock="Bottom" Height="40" >

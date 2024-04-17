@@ -29,30 +29,34 @@ namespace GestiontrendCoins.FormEditar
             get { return articuloSeleccionado; }
             set { SetProperty(ref articuloSeleccionado, value); }
         }
+
+        private Articulo auxiliar;
+
         public RelayCommand CambiarFotoCommand { get; }
+
 
         public EditarFormVM()
         {
             ListaTipos = new ObservableCollection<String>() { "Pantalones", "Camisetas", "Calzado", "Complementos" };
             CambiarFotoCommand = new RelayCommand(AbrirDialogoCambiarFoto);
-            ArticuloSeleccionado = WeakReferenceMessenger.Default.Send<ArticuloSeleccionadoMensaje>();
 
-            if (ArticuloSeleccionado.Imagendb is null)
-            {
-                
-                ArticuloSeleccionado.ImagenBMP = new BitmapImage(new Uri("pack://application:,,,/Resources/ropaMissing.png"));
-            }
-            else
-            {
-                ArticuloSeleccionado.ImagenBMP = ConversorImagen.Base64ToImage(ArticuloSeleccionado.Imagendb);
+            ArticuloSeleccionado = new Articulo();
 
-            }
+            auxiliar = WeakReferenceMessenger.Default.Send<ArticuloSeleccionadoMensaje>();
+
+            ArticuloSeleccionado.Id = auxiliar.Id;
+            ArticuloSeleccionado.Imagendb = auxiliar.Imagendb;
+            ArticuloSeleccionado.ImagenBMP = auxiliar.ImagenBMP;
+            ArticuloSeleccionado.Descripcion = auxiliar.Descripcion;
+            ArticuloSeleccionado.Precio = auxiliar.Precio;
+            ArticuloSeleccionado.Tipo = auxiliar.Tipo;
+
         }
 
         public bool EditarArticulo()
         {
              
-            if (ArticuloSeleccionado.Precio.ToString().All(char.IsDigit) && ArticuloSeleccionado.ImagenBMP is not null)
+            if (ArticuloSeleccionado.Precio.ToString().All(char.IsDigit))
             {
                 // WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(new Articulo(ArticuloSeleccionado.Id,ArticuloSeleccionado.Imagendb, ArticuloSeleccionado.Descripcion, ArticuloSeleccionado.Precio, ArticuloSeleccionado.Tipo)));
                 WeakReferenceMessenger.Default.Send(new EnviarArticuloEditarMensaje(ArticuloSeleccionado));
@@ -68,13 +72,17 @@ namespace GestiontrendCoins.FormEditar
         public void AbrirDialogoCambiarFoto()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Imagenes|*.png";
             openFileDialog.Title = "Abriendo imagendb";
+            openFileDialog.Filter = "Imágenes|*.bmp; *.gif; *.jpg; *.jpeg; *.png;";
 
             if (openFileDialog.ShowDialog() == true)
             {
+                // Obtenemos la imagen en base64.
                 ArticuloSeleccionado.Imagendb = ConversorImagen.BytesToBase64(ConversorImagen.CompressImage(new BitmapImage(new Uri(openFileDialog.FileName))));
+
+                // Obtenemos la imagen en BitmapImage.
                 ArticuloSeleccionado.ImagenBMP = ConversorImagen.Base64ToImage(ArticuloSeleccionado.Imagendb);
+
             }
         }
     }

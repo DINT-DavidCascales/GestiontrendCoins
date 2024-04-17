@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1090" MinHeight="500" MinWidth="800">
     <Window.Resources>
-        <local:ConvertidorImg x:Key="convertidorImg"></local:ConvertidorImg>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="20"></Setter>
             <Setter Property="Height" Value="20"></Setter>

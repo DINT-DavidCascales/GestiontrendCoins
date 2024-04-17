@@ -41,6 +41,10 @@ namespace GestiontrendCoins
             ns =new NavegacionService();
             peticiones = new PeticionesApi();
             Articulos = peticiones.GetArticulos();
+            foreach (var articulo in Articulos)
+            {
+                articulo.ImagenBMP = ConversorImagen.Base64ToImage(articulo.Imagendb);
+            }
             EliminarCommand = new RelayCommand(EliminarArticulo);
             AñadirCommand = new RelayCommand(AbrirFormAddArt);
             EditarCommand = new RelayCommand(AbrirFormEditArt);
@@ -54,11 +58,19 @@ namespace GestiontrendCoins
                 if (peticiones.PostArticulo(m.Value).IsSuccessful)
                 {
                     Articulos = peticiones.GetArticulos();
+                    foreach (var articulo in Articulos)
+                    {
+                        articulo.ImagenBMP = ConversorImagen.Base64ToImage(articulo.Imagendb);
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Error al añadir un articulo " + peticiones.PostArticulo(m.Value).ErrorMessage, "Error Añadir Articulo", MessageBoxButton.OK, MessageBoxImage.Error);
                     Articulos = peticiones.GetArticulos();
+                    foreach (var articulo in Articulos)
+                    {
+                        articulo.ImagenBMP = ConversorImagen.Base64ToImage(articulo.Imagendb);
+                    }
                 }
                 
             });
@@ -68,12 +80,20 @@ namespace GestiontrendCoins
                 if (peticiones.PutArticulo(m.Value).IsSuccessful)
                 {
                     Articulos = peticiones.GetArticulos();
+                    foreach (var articulo in Articulos)
+                    {
+                        articulo.ImagenBMP = ConversorImagen.Base64ToImage(articulo.Imagendb);
+                    }
 
                 }
                 else
                 {
                     MessageBox.Show("Error al editar un articulo ", "Error Editar Articulo", MessageBoxButton.OK, MessageBoxImage.Error);
                     Articulos = peticiones.GetArticulos();
+                    foreach (var articulo in Articulos)
+                    {
+                        articulo.ImagenBMP = ConversorImagen.Base64ToImage(articulo.Imagendb);
+                    }
                 }
             });
         }
@@ -94,14 +114,16 @@ namespace GestiontrendCoins
                 {
                     peticiones.DeleteArticulo(ArticuloSeleccionado.Id);
                     Articulos = peticiones.GetArticulos();
+                    foreach (var articulo in Articulos)
+                    {
+                        articulo.ImagenBMP = ConversorImagen.Base64ToImage(articulo.Imagendb);
+                    }
                 }
             }
             else
             {
                 MessageBox.Show("No has seleccionado ningun artículo", "Error Eliminar Articulo", MessageBoxButton.OK,MessageBoxImage.Error);
             }
-
-
         }
     }
 }

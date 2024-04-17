@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -13,10 +14,13 @@ using System.Windows.Media.Imaging;
 
 namespace GestiontrendCoins.Modelo
 {
+    // "DataContract" es para personalizar el archivo JSON que se crea con los métodos RestSharp.
+    [DataContract]
     class Articulo : ObservableObject
     {
         private int id;
         [JsonProperty("id")]
+        [DataMember]         // Le indica que la propiedad se incluya en JSON.
         public int Id
         {
             get { return id; }
@@ -24,22 +28,24 @@ namespace GestiontrendCoins.Modelo
         }
 
         private string imagendb;
+        [JsonProperty("imagen")]
+        [DataMember]         // Le indica que la propiedad se incluya en JSON.
         public string Imagendb
         {
             get { return imagendb; }
             set { SetProperty(ref imagendb, value); }
         }
         
-        private BitmapImage? imagenBMP;
+        private BitmapImage imagenBMP;
 
-        public BitmapImage? ImagenBMP
+        public BitmapImage ImagenBMP
         {
             get { return imagenBMP; }
             set { SetProperty(ref imagenBMP, value); }
         }
         private string descripcion;
         [JsonProperty("descripcion")]
-
+        [DataMember]         // Le indica que la propiedad se incluya en JSON.
         public string Descripcion
         {
             get { return descripcion; }
@@ -47,7 +53,7 @@ namespace GestiontrendCoins.Modelo
         }
         private int precio;
         [JsonProperty("precio")]
-
+        [DataMember]         // Le indica que la propiedad se incluya en JSON.
         public int Precio
         {
             get { return precio; }
@@ -55,7 +61,7 @@ namespace GestiontrendCoins.Modelo
         }
         private string tipo;
         [JsonProperty("tipo")]
-
+        [DataMember]         // Le indica que la propiedad se incluya en JSON.
         public string Tipo
         {
             get { return tipo; }
