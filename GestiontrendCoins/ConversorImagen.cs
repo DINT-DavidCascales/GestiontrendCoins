@@ -14,6 +14,8 @@ namespace GestiontrendCoins
 {
     internal class ConversorImagen
     {
+
+        //... Para comprimir la imagen antes de convertirla a base64.
         public static byte[] CompressImage(BitmapImage image)
         {
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
@@ -26,6 +28,29 @@ namespace GestiontrendCoins
                 return ms.ToArray();
             }
         }
+
+        //... Para pasar a base64 antes de almacenar en base de datos.
+        public static string BytesToBase64(byte[] imageBytes)
+        {
+            return Convert.ToBase64String(imageBytes);
+        }
+
+        // Para pasar de base64 a imagen-comprimida y descomprimir.
+        public static BitmapImage Base64ToImage(string base64String)
+        {
+            // Decodificar la cadena base64.
+            byte[] byteBuffer = Convert.FromBase64String(base64String);
+
+            using (MemoryStream memoryStream = new MemoryStream(byteBuffer))
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                return bitmapImage;
+            }
+        }
         public static BitmapImage DecompressImage(byte[] imageBytes)
         {
             using (MemoryStream ms = new MemoryStream(imageBytes))
@@ -36,26 +61,6 @@ namespace GestiontrendCoins
                 image.EndInit();
                 return image;
             }
-        }
-
-
-        // Este metodo hace lo mismo que el anterior pero ademas antes de descomprimirla pasa de base64 a byte[]
-        public static BitmapImage Base64ToImage(string base64String)
-        {
-            byte[] byteBuffer = Convert.FromBase64String(base64String);
-
-            using (MemoryStream memoryStream = new MemoryStream(byteBuffer))
-            {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memoryStream;
-                bitmapImage.EndInit();
-                return bitmapImage;
-            }
-        }
-        public static string BytesToBase64(byte[] imageBytes)
-        {
-            return Convert.ToBase64String(imageBytes);
         }
         public BitmapImage ByteToBitmapImage(byte[] img)
         {

@@ -31,17 +31,20 @@
             <Image DockPanel.Dock="Left" Source="/Resources/imginicioapp.jpeg" Width="100" Height="100" Margin="12"></Image>
             <TextBlock HorizontalAlignment="Center" FontSize="90">Trend Coins
                 <TextBlock.Foreground>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Offset="0" Color="LightBlue" />
-                        <GradientStop Offset="1" Color="DarkBlue" />
-                    </LinearGradientBrush>
+                    <SolidColorBrush x:Name="MySolidColorBrush" Color="DarkBlue" />
                 </TextBlock.Foreground>
-                <TextBlock.Effect>
-                    <DropShadowEffect ShadowDepth="2" Color="Gray" Opacity="0.5" />
-                </TextBlock.Effect>
+                <!-- Animates the text block's color. -->
+                <TextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetName="MySolidColorBrush" Storyboard.TargetProperty="Color" From="DarkBlue" To="#FFFC7B65" Duration="0:0:3" AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBlock.Triggers>
             </TextBlock>
         </DockPanel>
-
 
 
         <Grid DockPanel.Dock="Bottom" Height="150">
@@ -89,18 +92,18 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="False" Margin="30" Width="200">
-                        <Image Source="{Binding Path=ImagenBMP}" DockPanel.Dock="top" Height="50"  HorizontalAlignment="center"></Image>
+                        <Image Source="{Binding Path=ImagenBMP}" DockPanel.Dock="top" Height="100" Width="80"  HorizontalAlignment="center" Stretch="Fill" Margin="8"></Image>
                         <StackPanel HorizontalAlignment="Center">
                             <StackPanel Height="60">
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=Descripcion}"></TextBlock>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Path=Descripcion}" FontSize="15" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Comic Sans MS"></TextBlock>
                             </StackPanel>
-                            <DockPanel  LastChildFill="False" Height="30">
-                                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" >Puntos:</TextBlock>
-                                <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Text="{Binding Path=Precio}"></TextBlock>
+                            <DockPanel  LastChildFill="False" Height="30" Width="150">
+                                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" FontFamily="Cascadia Code" >Puntos:</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Text="{Binding Path=Precio}" FontFamily="Alef"></TextBlock>
                             </DockPanel>
-                            <DockPanel  LastChildFill="False" Height="30">
-                                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" >Tipo:</TextBlock>
-                                <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" Text="{Binding Path=Tipo}"></TextBlock>
+                            <DockPanel  LastChildFill="False" Height="30" Width="150">
+                                <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center" FontFamily="Cascadia Code" >Tipo:</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center" FontFamily="Cascadia Code" Text="{Binding Path=Tipo}"></TextBlock>
                             </DockPanel>
                         </StackPanel>
                     </DockPanel>
