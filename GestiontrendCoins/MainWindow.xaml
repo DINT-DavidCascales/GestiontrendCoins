@@ -92,7 +92,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel LastChildFill="False" Margin="30" Width="200">
-                        <Image Source="{Binding Path=ImagenBMP}" DockPanel.Dock="top" Height="100" Width="80"  HorizontalAlignment="center" Stretch="Fill" Margin="8"></Image>
+                        <Image Source="{Binding Path=ImagenBMP}" DockPanel.Dock="top" Height="120" Width="90"  HorizontalAlignment="center" Stretch="Fill" Margin="8"></Image>
                         <StackPanel HorizontalAlignment="Center">
                             <StackPanel Height="60">
                                 <TextBlock VerticalAlignment="Center" Text="{Binding Path=Descripcion}" FontSize="15" HorizontalAlignment="Center" TextWrapping="Wrap" FontFamily="Comic Sans MS"></TextBlock>
