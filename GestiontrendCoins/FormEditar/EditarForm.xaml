@@ -52,7 +52,7 @@
 
         <StackPanel DockPanel.Dock="Right" Margin="10" Width="198">
             <TextBlock Margin="5">Descripcion</TextBlock>
-            <TextBox Text="{Binding Path=ArticuloSeleccionado.Descripcion,UpdateSourceTrigger=PropertyChanged}" Margin="5" Height="37"></TextBox>
+            <TextBox Text="{Binding Path=ArticuloSeleccionado.Descripcion,UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap" Height="37"></TextBox>
             <TextBlock Margin="5">Precio</TextBlock>
             <TextBox Text="{Binding Path=ArticuloSeleccionado.Precio,UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="50" HorizontalAlignment="Left" Height="17"></TextBox>
             <TextBlock Margin="5" Text="Tipo"></TextBlock>
