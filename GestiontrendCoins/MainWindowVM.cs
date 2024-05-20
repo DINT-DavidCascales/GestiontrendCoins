@@ -34,11 +34,11 @@ namespace GestiontrendCoins
         public RelayCommand EliminarCommand { get; }
         public RelayCommand AñadirCommand { get; }
         public RelayCommand EditarCommand { get; }
-        private NavegacionService ns;
+        private NavegacionService navegacionService;
 
         public MainWindowVM()
         {
-            ns =new NavegacionService();
+            navegacionService =new NavegacionService();
             peticiones = new PeticionesApi();
             Articulos = peticiones.GetArticulos();
             foreach (var articulo in Articulos)
@@ -99,11 +99,11 @@ namespace GestiontrendCoins
         }
         public void AbrirFormAddArt()
         {
-            ns.AbrirNuevoArt();
+            navegacionService.AbrirNuevoArt();
         }
         public void AbrirFormEditArt()
         {
-            ns.AbrirEditarForm();
+            navegacionService.AbrirEditarForm();
         }
         public void EliminarArticulo()
         {

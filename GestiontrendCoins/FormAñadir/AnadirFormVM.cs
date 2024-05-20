@@ -26,11 +26,11 @@ namespace GestiontrendCoins.FormAñadir
             set { SetProperty(ref listaTipos, value); }
         }
 
-        private Articulo _nuevoArticulo;
+        private Articulo nuevoArticulo;
         public Articulo NuevoArticulo
         {
-            get { return _nuevoArticulo; }
-            set { SetProperty(ref _nuevoArticulo, value); }
+            get { return nuevoArticulo; }
+            set { SetProperty(ref nuevoArticulo, value); }
         }
         
         public RelayCommand CambiarFotoCommand { get; }
